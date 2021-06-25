@@ -1,4 +1,5 @@
 import { useHistory } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
 import illustrationImg from './../assets/images/illustration.svg';
 import logoImg from './../assets/images/logo.svg';
@@ -10,8 +11,13 @@ import './../styles/auth.scss';
 
 export function Home() {
     const history = useHistory();
+    const { user, signInWithGoogle } = useAuth();
 
-    function navigationToNewRoom() {
+    async function handleCreateRoom() {
+        if (!user) {
+            await signInWithGoogle();
+        }
+
         history.push('/rooms/new');
     }
 
@@ -25,7 +31,7 @@ export function Home() {
             <main>
                 <div className="main-content">
                     <img src={logoImg} alt="Letmeask" />
-                    <button className="create-room" onClick={navigationToNewRoom}>
+                    <button className="create-room" onClick={handleCreateRoom}>
                         <img src={googleIconImg} alt="Logo do Google" />
                         Crie sua salas com o Google
                     </button>
