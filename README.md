@@ -66,4 +66,4 @@ Lembrando que você precisa ter uma conta no [Figma](http://figma.com/).
 Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
 
 ---
-👋🏻 [Participe desta grande comunidade](https://discord.gg/gKUVrzrPrU)
+👋🏻 [Participar da comunidade](https://discord.gg/gKUVrzrPrU)
