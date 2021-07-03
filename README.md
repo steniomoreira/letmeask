@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Letmeask" src=".github/Logo.svg" width="160px">
+  <img alt="Letmeask" src=".github/logomarca.svg" width="160px">
 </p>
 
 <p align="center">
@@ -9,7 +9,7 @@
 </p>
 
 <h1 align="center">
-    <img alt="Letmeask" src=".github/cover.svg" />
+    <img alt="Letmeask" src=".github/screenshot.svg" />
 </h1>
 
 <br>
@@ -64,4 +64,4 @@ Lembrando que você precisa ter uma conta no [Figma](http://figma.com/).
 Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
 
 ---
-👋🏻 [Participe da nossa comunidade](https://discord.gg/gKUVrzrPrU)
+👋🏻 [Participar da comunidade](https://discord.gg/gKUVrzrPrU)
