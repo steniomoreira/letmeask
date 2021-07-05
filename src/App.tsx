@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import * as themes from './styles/themes';
+import usePersistedState from './utils/usePersistedState';
 
 import { Home } from "./pages/Home";
 import { NewRoom } from "./pages/NewRoom";
@@ -13,7 +13,7 @@ import { ThemeButton } from './components/ThemeButton';
 import { ThemeProvider } from 'styled-components';
 
 function App() {
-  const [theme, setTheme] = useState(themes.light);
+  const [theme, setTheme] = usePersistedState('LetmeaskTheme', themes.light);
 
   const toogleTheme = () => {
     setTheme(theme.name === 'light' ? themes.dark : themes.light);
