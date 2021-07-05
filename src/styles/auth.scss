@@ -141,4 +141,18 @@
             margin-left: 16px;
         }
     }
+
+    @media (max-width: 800px) {
+        display: block;
+
+        aside, main {
+            padding: 32px;
+            align-items: center;
+            height: 100vh;
+        }
+
+        aside img {
+            max-width: 180px;
+        }
+    }
 }
