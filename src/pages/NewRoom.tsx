@@ -1,10 +1,12 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useContext } from 'react';
+import { ThemeContext } from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 import { database } from '../services/firebase';
 import { useAuth } from '../hooks/useAuth';
 
 import illustrationImg from './../assets/images/illustration.svg';
 import logoImg from './../assets/images/logo.svg';
+import logoImgWhite from './../assets/images/logoWhite.svg';
 import { Button } from '../components/Button';
 
 import './../styles/auth.scss';
@@ -13,6 +15,7 @@ export function NewRoom() {
   const { user } = useAuth();
   const history = useHistory();
   const [newRoom, setNewRoom] = useState('');
+  const { name } = useContext(ThemeContext);
 
   async function handleCreateRoom(event: FormEvent) {
     event.preventDefault();
@@ -28,7 +31,7 @@ export function NewRoom() {
       authorId: user?.id,
     });
 
-    history.push(`/rooms/${firebaseRoom.key}`);
+    history.push(`/admin/rooms/${firebaseRoom.key}`);
   }
 
   return (
@@ -40,7 +43,7 @@ export function NewRoom() {
       </aside>
       <main>
         <div className="main-content">
-          <img src={logoImg} alt="Letmeask" />
+          <img src={name === 'light' ? logoImg: logoImgWhite} alt="Letmeask" />
           <h2>Criar uma nova sala</h2>
           <form onSubmit={handleCreateRoom}>
             <input

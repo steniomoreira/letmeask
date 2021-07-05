@@ -16,4 +16,22 @@ export default createGlobalStyle `
     body, input, button, textarea {
         font: 400 16px 'Roboto', sans-serif;
     }
+
+    input {
+        &:focus {
+            outline: none;
+        }
+    }
+
+    textarea {
+        transition: .9s;
+        background: ${props => props.theme.colors.input};
+        border: 0;
+        color: ${props => props.theme.colors.text};
+
+        &:focus {
+            outline: none;
+        }
+        
+    }
 `;

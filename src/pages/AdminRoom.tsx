@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { ThemeContext } from 'styled-components';
 
 import { Button } from '../components/Button';
 import { Question } from '../components/Question';
@@ -8,6 +10,7 @@ import { useRoom } from '../hooks/useRoom';
 import { database } from '../services/firebase';
 
 import logoImg from '../assets/images/logo.svg';
+import logoImgWhite from '../assets/images/logoWhite.svg';
 import checkImg from '../assets/images/check.svg';
 import answerImg from '../assets/images/answer.svg';
 import deleteImg from '../assets/images/delete.svg';
@@ -24,6 +27,7 @@ export function AdminRoom() {
 	const params = useParams<RoomParams>();
 	const roomId = params.id;
 	const { title, questions} = useRoom(roomId);
+	const {name, colors} = useContext(ThemeContext);
 
 	async function handleEndRoom() {
 		await database.ref(`/rooms/${roomId}`).update({
@@ -55,10 +59,15 @@ export function AdminRoom() {
 		<div id="page-room">
 			<header>
 				<div className="content">
-					<img src={logoImg} alt="Letmeask" />
+					<img src={name === 'light' ? logoImg: logoImgWhite} alt="Letmeask" />
                     <div>
 					    <RoomCode code={roomId} />
-                        <Button isOutlined onClick={handleEndRoom}>Encerrar sala</Button>
+                        <Button 
+							isOutlined 
+							onClick={handleEndRoom}
+							style={{background: colors.input}}>
+							Encerrar sala
+						</Button>
                     </div>
 				</div>
 			</header>
