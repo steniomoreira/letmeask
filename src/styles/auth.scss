@@ -67,7 +67,7 @@
                 border-radius: 8px;
                 padding: 0 16px;
                 background: #fff;
-                border: 1x solid #a8a8b3;
+                border: 1px solid #a8a8b3;
             }
 
             button {
@@ -139,6 +139,20 @@
             height: 1px;
             background: #a8a8b3;
             margin-left: 16px;
+        }
+    }
+
+    @media (max-width: 800px) {
+        display: block;
+
+        aside, main {
+            padding: 32px;
+            align-items: center;
+            height: 100vh;
+        }
+
+        aside img {
+            max-width: 180px;
         }
     }
 }

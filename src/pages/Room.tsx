@@ -1,14 +1,14 @@
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useContext } from 'react';
+import { ThemeContext } from 'styled-components';
 import { useParams } from 'react-router-dom';
 import logoImg from '../assets/images/logo.svg';
+import logoImgWhite from '../assets/images/logoWhite.svg';
 import { Button } from '../components/Button';
 import { Question } from '../components/Question';
 import { RoomCode } from '../components/RoomCode';
 import { useAuth } from '../hooks/useAuth';
 import { useRoom } from '../hooks/useRoom';
 import { database } from '../services/firebase';
-
-import '../styles/room.scss';
 
 type RoomParams = {
 	id: string
@@ -21,6 +21,7 @@ export function Room() {
 
 	const roomId = params.id;
 	const { title, questions} = useRoom(roomId);
+	const {name, colors} = useContext(ThemeContext);
 	
 	async function handleSendQuestion(event: FormEvent) {
 		event.preventDefault();
@@ -62,7 +63,7 @@ export function Room() {
 		<div id="page-room">
 			<header>
 				<div className="content">
-					<img src={logoImg} alt="Letmeask" />
+					<img src={name === 'light' ? logoImg: logoImgWhite} alt="Letmeask" />
 					<RoomCode code={roomId} />
 				</div>
 			</header>
@@ -85,7 +86,7 @@ export function Room() {
 						{user ? (
 							<div className="user-info">
 								<img src={user.avatar} alt={user.name} />
-								<span>{user.name}</span>
+								<span style={{color:colors.text}}>{user.name}</span>
 							</div>
 						) : (
 							<span>Para enviar uma pergunta, <button>faça seu login</button>.</span>

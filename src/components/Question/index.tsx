@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import '../styles/question.scss';
+import { Card } from './styles';
 import cx from 'classnames'; 
 
 type QuestionProps = {
@@ -21,7 +21,7 @@ export function Question({
     children,
 }: QuestionProps) {
     return(
-        <div 
+        <Card 
             className={cx(
                 'question',
                 { answered : isAnswered },
@@ -36,6 +36,6 @@ export function Question({
                 </div>
                 <div>{ children }</div>
             </footer>
-        </div>
+        </Card >
     );
 }

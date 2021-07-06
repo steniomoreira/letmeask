@@ -1,5 +1,8 @@
-.question {
-    background: #fefefe;
+import styled from "styled-components";
+
+export const Card = styled.div`
+    background: ${props => props.theme.colors.input};
+    transition: .9s;
     border-radius: 8px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
     padding: 24px;
@@ -9,20 +12,20 @@
     }
 
     &.highlighted {
-        background: #F4F8FF;
-        border: 1px solid #835AFD;
+        background: ${props => props.theme.colors.highlight};
+        border: 1px solid ${props => props.theme.colors.primary};
         
         footer .user-info span {
-            color: #29292e;
+            color: ${props => props.theme.colors.text};
         }
     }
     
     &.answered {
-        background: #DBDCDD;
+        background: ${props => props.theme.colors.answer};
     }
 
     p {
-        color: #29292e;
+        color: ${props => props.theme.colors.text};
     }
 
     footer {
@@ -66,10 +69,10 @@
                 gap: 8px;
 
                 &.liked {
-                    color: #835afd;
+                    color: ${props => props.theme.colors.primary};
 
                     svg path {
-                        stroke: #835afd;
+                        stroke: ${props => props.theme.colors.primary};
                     }
                 }
             }
@@ -79,4 +82,4 @@
             }
         }
     }
-}
+`;
