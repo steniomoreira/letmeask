@@ -1,27 +1,47 @@
 import { useState, FormEvent, useContext } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 import { ThemeContext } from 'styled-components';
-import { useParams } from 'react-router-dom';
-import logoImg from '../assets/images/logo.svg';
-import logoImgWhite from '../assets/images/logoWhite.svg';
+import { database } from '../services/firebase';
+import { lighten } from 'polished';
+
 import { Button } from '../components/Button';
 import { Question } from '../components/Question';
 import { RoomCode } from '../components/RoomCode';
 import { useAuth } from '../hooks/useAuth';
 import { useRoom } from '../hooks/useRoom';
-import { database } from '../services/firebase';
+
+import logoImg from '../assets/images/logo.svg';
+import logoImgWhite from '../assets/images/logoWhite.svg';
+import { FiSun, FiLock, FiPower } from "react-icons/fi";
 
 type RoomParams = {
 	id: string
 };
 
 export function Room() {
-	const { user } = useAuth();
-	const params = useParams<RoomParams>();
+	const { user, signInWithGoogle, signOut} = useAuth();
 	const [newQuestion, setNewQuestion] = useState('');	
-
+	const {name, colors} = useContext(ThemeContext);
+	
+	const params = useParams<RoomParams>();
 	const roomId = params.id;
 	const { title, questions} = useRoom(roomId);
-	const {name, colors} = useContext(ThemeContext);
+
+	const history = useHistory();
+
+	async function handleSignIn() {
+		if (!user) {
+		  await signInWithGoogle();
+		}
+	}
+
+	async function handleSignOut() {
+		if (user) {
+		  await signOut();
+		}
+
+		history.push('/');
+	}
 	
 	async function handleSendQuestion(event: FormEvent) {
 		event.preventDefault();
@@ -31,7 +51,7 @@ export function Room() {
 		}
 
 		if (!user) {
-			throw new Error("You must be logged in");
+			throw new Error("You must be logged in");			
 		}
 
 		const question = {
@@ -64,7 +84,15 @@ export function Room() {
 			<header>
 				<div className="content">
 					<img src={name === 'light' ? logoImg: logoImgWhite} alt="Letmeask" />
-					<RoomCode code={roomId} />
+					<div>
+						<FiSun 
+							title={name === 'dark' ? 'Modo light' : 'Modo dark'} 
+							color={name === 'dark' ? lighten(0.2, colors.secondary) : colors.primary}
+						/>
+						<RoomCode code={roomId} />
+						<FiLock title='Bloquear'/>
+						<FiPower onClick={handleSignOut} title='Sair'/>
+					</div>
 				</div>
 			</header>
 			<main>
@@ -81,6 +109,7 @@ export function Room() {
 						placeholder="O que você quer perguntar"
 						onChange={event => setNewQuestion(event.target.value)}
 						value={newQuestion}
+						disabled={!user}
 					/>
 					<div className="form-footer">
 						{user ? (
@@ -89,7 +118,7 @@ export function Room() {
 								<span style={{color:colors.text}}>{user.name}</span>
 							</div>
 						) : (
-							<span>Para enviar uma pergunta, <button>faça seu login</button>.</span>
+							<span>Para enviar uma pergunta, <button onClick={handleSignIn}>faça seu login</button>.</span>
 						)}
 						<Button type="submit" disabled={!user}>Enviar pergunta</Button>
 					</div>
@@ -111,6 +140,7 @@ export function Room() {
 										type="button"
 										aria-label="Marcar como gostei"
 										onClick={() => handleLikeQuestion(question.id, question.likeId)}
+										disabled={!user}
 									>
 										{question.likeCount > 0 && <span>{question.likeCount}</span>}
 										<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
