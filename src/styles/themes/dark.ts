@@ -1,6 +1,5 @@
-/* eslint-disable import/no-anonymous-default-export */
-export default {
-    name: 'dark',
+const theme = {
+    mode: 'dark',
     colors: {
         primary: '#835afd',
         secondary: '#e559f9',
@@ -11,3 +10,5 @@ export default {
         answer: '#1D1D22'
     },
 }
+
+export default theme;

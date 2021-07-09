@@ -1,14 +1,16 @@
-import { useState, FormEvent, useContext } from 'react';
+import { useState, FormEvent } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { ThemeContext } from 'styled-components';
-import { database } from '../services/firebase';
-import { lighten } from 'polished';
+
+import { useAuth } from '../hooks/useAuth';
+import { useRoom } from '../hooks/useRoom';
+import { useTheme } from '../hooks/useTheme';
 
 import { Button } from '../components/Button';
 import { Question } from '../components/Question';
 import { RoomCode } from '../components/RoomCode';
-import { useAuth } from '../hooks/useAuth';
-import { useRoom } from '../hooks/useRoom';
+
+import { database } from '../services/firebase';
+import { lighten } from 'polished';
 
 import logoImg from '../assets/images/logo.svg';
 import logoImgWhite from '../assets/images/logoWhite.svg';
@@ -21,7 +23,7 @@ type RoomParams = {
 export function Room() {
 	const { user, signInWithGoogle, signOut} = useAuth();
 	const [newQuestion, setNewQuestion] = useState('');	
-	const {name, colors} = useContext(ThemeContext);
+	const {theme, toggleTheme} = useTheme();
 	
 	const params = useParams<RoomParams>();
 	const roomId = params.id;
@@ -83,13 +85,14 @@ export function Room() {
 		<div id="page-room">
 			<header>
 				<div className="content">
-					<img src={name === 'light' ? logoImg: logoImgWhite} alt="Letmeask" />
+					<img src={theme.mode === 'dark' ? logoImgWhite : logoImg} alt="Letmeask" />
 					<div>
+						<RoomCode code={roomId} />						
 						<FiSun 
-							title={name === 'dark' ? 'Modo light' : 'Modo dark'} 
-							color={name === 'dark' ? lighten(0.2, colors.secondary) : colors.primary}
+							onClick={()=>toggleTheme()}
+							title={theme.mode === 'dark' ? 'Modo light' : 'Modo dark'} 
+							color={theme.mode === 'dark' ? lighten(0.1, theme.colors.secondary) : theme.colors.primary}
 						/>
-						<RoomCode code={roomId} />
 						<FiLock title='Bloquear'/>
 						<FiPower onClick={handleSignOut} title='Sair'/>
 					</div>
@@ -115,7 +118,7 @@ export function Room() {
 						{user ? (
 							<div className="user-info">
 								<img src={user.avatar} alt={user.name} />
-								<span style={{color:colors.text}}>{user.name}</span>
+								<span style={{color:theme.colors.text}}>{user.name}</span>
 							</div>
 						) : (
 							<span>Para enviar uma pergunta, <button onClick={handleSignIn}>faça seu login</button>.</span>

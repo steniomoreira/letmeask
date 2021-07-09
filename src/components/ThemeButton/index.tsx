@@ -10,10 +10,10 @@ interface PropsThemeButton {
 }
 
 export function ThemeButton(props: PropsThemeButton) {
-    const {name, colors} = useContext(ThemeContext);
+    // const {name, colors} = useContext(ThemeContext);
     return(
         <Content>
-            <Switch 
+            {/* <Switch 
                 onChange={props.toogleTheme} 
                 checked={name === 'dark'}
                 onColor={shade(0.9, colors.primary)}
@@ -47,7 +47,7 @@ export function ThemeButton(props: PropsThemeButton) {
                         </svg>
                     </div>
                 }
-            />
+            /> */}
         </Content>
     );
 }

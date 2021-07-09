@@ -3,6 +3,10 @@ import { ThemeContext } from 'styled-components';
 import { FiClipboard } from "react-icons/fi";
 import toast, { Toaster } from 'react-hot-toast';
 
+import copyImg from './../../assets/images/copy.svg';
+
+import { Button } from './styles';
+
 type RoomCodeProps = {
 	code: string
 }
@@ -24,7 +28,13 @@ export function RoomCode(props: RoomCodeProps) {
 	return (
 		<>
 			<Toaster position="top-center" reverseOrder={false} />
-			<FiClipboard onClick={copyRoomCodeToCliboard} title={`Sala ${props.code}`}/>
+			<Button className="room-code" onClick={copyRoomCodeToCliboard}>
+				<div>
+				<img src={copyImg} alt="Copy room code" />
+				</div>
+				<span>Sala ${props.code}</span>
+			</Button>
+			{/* <FiClipboard onClick={copyRoomCodeToCliboard} title={`Sala ${props.code}`}/> */}
 		</>
 	);
 }

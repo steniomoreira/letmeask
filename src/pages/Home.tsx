@@ -1,8 +1,10 @@
-import { FormEvent, useState, useContext } from 'react';
+import { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ThemeContext } from 'styled-components';
 
 import { useAuth } from '../hooks/useAuth';
+import { useTheme } from '../hooks/useTheme';
+
+import { Button } from '../components/Button';
 import { database } from '../services/firebase';
 
 import illustrationImg from './../assets/images/illustration.svg';
@@ -10,15 +12,13 @@ import logoImg from './../assets/images/logo.svg';
 import logoImgWhite from './../assets/images/logoWhite.svg';
 import googleIconImg from './../assets/images/google-icon.svg';
 
-import { Button } from '../components/Button';
-
 import './../styles/auth.scss';
 
 export function Home() {
 	const history = useHistory();
 	const { user, signInWithGoogle } = useAuth();
 	const [roomCode, setRoomCode] = useState('');
-	const {name} = useContext(ThemeContext);
+	const {theme} = useTheme();
 
 	async function handleCreateRoom() {
 		if (!user) {
@@ -59,7 +59,7 @@ export function Home() {
 			</aside>
 			<main>				
 				<div className="main-content">
-					<img src={name === 'light' ? logoImg: logoImgWhite} alt="Letmeask" />
+					<img src={theme.mode === 'dark' ? logoImgWhite: logoImg} alt="Letmeask" />
 					<button className="create-room" onClick={handleCreateRoom}>
 						<img src={googleIconImg} alt="Logo do Google" />
 						Crie sua salas com o Google
