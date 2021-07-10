@@ -1,37 +1,9 @@
-#page-auth {
+import styled from "styled-components";
+
+export const Content = styled.div`
     display: flex;
     align-items: stretch;
     height: 100vh;
-
-    aside {
-        flex: 5;
-
-        background: #835afd;
-        color: #fff;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        padding: 120px 80px;
-
-        img {
-            max-width: 320px;
-        }
-
-        strong {
-            font: 700 36px Poppins, sans-serif;
-            line-height: 42px;
-            margin-top: 16px;
-        }
-
-        p {
-            font-size: 16px;
-            line-height: 32px;
-            margin-top: 16px;
-            color: #f8f8f8;
-        }
-    }
 
     main {
         flex: 8;
@@ -155,4 +127,4 @@
             max-width: 180px;
         }
     }
-}
+`;

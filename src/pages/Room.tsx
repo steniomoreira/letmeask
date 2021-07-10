@@ -87,7 +87,7 @@ export function Room() {
 				<div className="content">
 					<img src={theme.mode === 'dark' ? logoImgWhite : logoImg} alt="Letmeask" />
 					<div>
-						<RoomCode code={roomId} />						
+						<RoomCode code={roomId} />
 						<FiSun 
 							onClick={()=>toggleTheme()}
 							title={theme.mode === 'dark' ? 'Modo light' : 'Modo dark'} 
@@ -101,10 +101,10 @@ export function Room() {
 			<main>
 				<div className="room-title">
 					<h1>Sala {title}</h1>
-					<span>
-						{questions.length > 0 ? questions.length : 'sem'}&nbsp;
-						pergunta{questions.length !== 1 && 's'}
-					</span>
+
+					{questions.length > 0 && 
+						<span>{questions.length} pergunta{questions.length !== 1 && 's'}</span>
+					}
 				</div>
 
 				<form onSubmit={handleSendQuestion}>

@@ -1,18 +1,18 @@
 import { FormEvent, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import { useAuth } from '../hooks/useAuth';
-import { useTheme } from '../hooks/useTheme';
+import { useAuth } from '../../hooks/useAuth';
+import { useTheme } from '../../hooks/useTheme';
 
-import { Button } from '../components/Button';
-import ButtonTheme from '../components/ButtonTheme';
-import { database } from '../services/firebase';
+import Aside from '../../components/Aside';
+import ButtonTheme from '../../components/ButtonTheme';
+import { Button } from '../../components/Button';
+import { database } from '../../services/firebase';
 
-import illustrationImg from './../assets/images/illustration.svg';
-import logoImg from './../assets/images/logo.svg';
-import logoImgWhite from './../assets/images/logoWhite.svg';
+import logoImg from './../../assets/images/logo.svg';
+import logoImgWhite from './../../assets/images/logoWhite.svg';
 
-import './../styles/auth.scss';
+import { Content } from './styles';
 
 export function NewRoom() {
   const { user } = useAuth();
@@ -38,12 +38,9 @@ export function NewRoom() {
   }
 
   return (
-    <div id="page-auth">
-      <aside>
-        <img src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas" />
-        <strong>Crie salas de Q&amp;A ao-vivo</strong>
-        <p>Tire as dúvidas de sua audiência em tempo-real</p>
-      </aside>
+    <Content>
+      <Aside />
+
       <main>
         <ButtonTheme toggleTheme={()=>toggleTheme()}/>
         <div className="main-content">
@@ -65,6 +62,6 @@ export function NewRoom() {
           </p>
         </div>
       </main>
-    </div>
+    </Content>
   );
 }
