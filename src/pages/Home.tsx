@@ -5,6 +5,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useTheme } from '../hooks/useTheme';
 
 import { Button } from '../components/Button';
+import ButtonTheme from '../components/ButtonTheme';
 import { database } from '../services/firebase';
 
 import illustrationImg from './../assets/images/illustration.svg';
@@ -18,7 +19,7 @@ export function Home() {
 	const history = useHistory();
 	const { user, signInWithGoogle } = useAuth();
 	const [roomCode, setRoomCode] = useState('');
-	const {theme} = useTheme();
+	const {theme, toggleTheme } = useTheme();
 
 	async function handleCreateRoom() {
 		if (!user) {
@@ -57,7 +58,8 @@ export function Home() {
 				<strong>Crie salas de Q&amp;A ao-vivo</strong>
 				<p>Tire as dúvidas de sua audiência em tempo-real</p>
 			</aside>
-			<main>				
+			<main>
+				<ButtonTheme toggleTheme={()=>toggleTheme()}/>
 				<div className="main-content">
 					<img src={theme.mode === 'dark' ? logoImgWhite: logoImg} alt="Letmeask" />
 					<button className="create-room" onClick={handleCreateRoom}>

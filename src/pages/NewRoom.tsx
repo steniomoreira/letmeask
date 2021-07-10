@@ -5,6 +5,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useTheme } from '../hooks/useTheme';
 
 import { Button } from '../components/Button';
+import ButtonTheme from '../components/ButtonTheme';
 import { database } from '../services/firebase';
 
 import illustrationImg from './../assets/images/illustration.svg';
@@ -15,7 +16,7 @@ import './../styles/auth.scss';
 
 export function NewRoom() {
   const { user } = useAuth();
-  const { theme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const history = useHistory();
   const [newRoom, setNewRoom] = useState('');
 
@@ -44,6 +45,7 @@ export function NewRoom() {
         <p>Tire as dúvidas de sua audiência em tempo-real</p>
       </aside>
       <main>
+        <ButtonTheme toggleTheme={()=>toggleTheme()}/>
         <div className="main-content">
           <img src={theme.mode === 'dark' ? logoImgWhite: logoImg} alt="Letmeask" />
           <h2>Criar uma nova sala</h2>
