@@ -115,16 +115,28 @@ export const Content = styled.div`
     }
 
     @media (max-width: 800px) {
-        display: block;
+        aside {
+            display: none;
+        }        
 
-        aside, main {
+        main {
             padding: 32px;
             align-items: center;
             height: 100vh;
-        }
-
-        aside img {
-            max-width: 180px;
+            &:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #000;
+                background-image: url('/images/illustration.svg');
+                background-repeat: no-repeat;
+                background-position: center;
+                z-index: -1;
+                opacity: .2;
+            }            
         }
     }
 `;
