@@ -58,7 +58,7 @@ export const Content = styled.div`
         }
 
         a {
-            color: #e559f9;
+            color: ${props => props.theme.colors.secondary};
         }
     }
 

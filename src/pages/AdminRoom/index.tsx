@@ -1,30 +1,29 @@
 import { useHistory, useParams } from 'react-router-dom';
+import { FiSun } from "react-icons/fi";
 
-// import { useAuth } from '../hooks/useAuth';
-import { useRoom } from '../hooks/useRoom';
-import { useTheme } from '../hooks/useTheme';
+import { useRoom } from '../../hooks/useRoom';
+import { useTheme } from '../../hooks/useTheme';
 
-import { Button } from '../components/Button';
-import { Question } from '../components/Question';
-import { RoomCode } from '../components/RoomCode';
+import Header from '../../components/Header';
+import { Button } from '../../components/Button';
+import { Question } from '../../components/Question';
+import { RoomCode } from '../../components/RoomCode';
 
-import { database } from '../services/firebase';
+import { database } from '../../services/firebase';
+import { lighten } from 'polished';
 
-import logoImg from '../assets/images/logo.svg';
-import logoImgWhite from '../assets/images/logoWhite.svg';
-import checkImg from '../assets/images/check.svg';
-import answerImg from '../assets/images/answer.svg';
-import deleteImg from '../assets/images/delete.svg';
+import checkImg from '../../assets/images/check.svg';
+import answerImg from '../../assets/images/answer.svg';
+import deleteImg from '../../assets/images/delete.svg';
 
-import '../styles/room.scss';
+import { Main } from './styles';
 
 type RoomParams = {
 	id: string
 };
 
 export function AdminRoom() {
-	// const { user } = useAuth();
-	const { theme } = useTheme();
+	const { theme, toggleTheme } = useTheme();
 	const history = useHistory();
 	const params = useParams<RoomParams>();
 	const roomId = params.id;
@@ -36,7 +35,7 @@ export function AdminRoom() {
 		});
 
 		history.push('/');
-	}	
+	}
 
 	async function handleDeleteQuestion(questionId: string) {
 		if (window.confirm('Tem certeza que você deseja exclir essa pergunta?')){
@@ -57,29 +56,29 @@ export function AdminRoom() {
 	}
 
 	return (
-		<div id="page-room">
-			<header>
-				<div className="content">
-					<img src={theme.mode === 'dark' ? logoImgWhite : logoImg} alt="Letmeask" />
-                    <div>
-					    <RoomCode code={roomId} />
-                        <Button 
-							isOutlined 
-							onClick={handleEndRoom}
-							style={{background: theme.colors.input}}
-							>
-							Encerrar sala
-						</Button>
-                    </div>
-				</div>
-			</header>
-			<main>
+		<>
+			<Header>				
+				<RoomCode code={roomId} />
+				<Button 
+					isOutlined 
+					onClick={handleEndRoom}
+					style={{background: theme.colors.input}}
+					>
+					Encerrar sala
+				</Button>
+
+				<FiSun 
+					onClick={()=>toggleTheme()}
+					title={theme.mode === 'dark' ? 'Modo light' : 'Modo dark'} 
+					color={theme.mode === 'dark' ? lighten(0.1, theme.colors.secondary) : theme.colors.primary}
+				/>   
+			</Header>
+			<Main>
 				<div className="room-title">
 					<h1>Sala {title}</h1>
-					<span>
-						{questions.length > 0 ? questions.length : 'sem'}&nbsp;
-						pergunta{questions.length !== 1 && 's'}
-					</span>
+					{questions.length > 0 && 
+						<span>{questions.length} pergunta{questions.length !== 1 && 's'}</span>
+					}
 				</div>
 				<div className="question-list">
 					{questions.map(question => {
@@ -117,7 +116,7 @@ export function AdminRoom() {
 						);
 					})}
 				</div>
-			</main>
-		</div>
+			</Main>
+		</>
 	);
 }

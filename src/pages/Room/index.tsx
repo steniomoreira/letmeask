@@ -1,20 +1,20 @@
 import { useState, FormEvent } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import { FiSun, FiPower } from "react-icons/fi";
 
-import { useAuth } from '../hooks/useAuth';
-import { useRoom } from '../hooks/useRoom';
-import { useTheme } from '../hooks/useTheme';
+import { useAuth } from '../../hooks/useAuth';
+import { useRoom } from '../../hooks/useRoom';
+import { useTheme } from '../../hooks/useTheme';
 
-import { Button } from '../components/Button';
-import { Question } from '../components/Question';
-import { RoomCode } from '../components/RoomCode';
+import Header from '../../components/Header';
+import { Button } from '../../components/Button';
+import { Question } from '../../components/Question';
+import { RoomCode } from '../../components/RoomCode';
 
-import { database } from '../services/firebase';
+import { database } from '../../services/firebase';
 import { lighten } from 'polished';
 
-import logoImg from '../assets/images/logo.svg';
-import logoImgWhite from '../assets/images/logoWhite.svg';
-import { FiSun, FiLock, FiPower } from "react-icons/fi";
+import { Main } from './styles';
 
 type RoomParams = {
 	id: string
@@ -27,7 +27,7 @@ export function Room() {
 	
 	const params = useParams<RoomParams>();
 	const roomId = params.id;
-	const { title, questions} = useRoom(roomId);
+	const { title, questions } = useRoom(roomId);
 
 	const history = useHistory();
 
@@ -82,23 +82,17 @@ export function Room() {
 	}
 
 	return (
-		<div id="page-room">
-			<header>
-				<div className="content">
-					<img src={theme.mode === 'dark' ? logoImgWhite : logoImg} alt="Letmeask" />
-					<div>
-						<RoomCode code={roomId} />
-						<FiSun 
-							onClick={()=>toggleTheme()}
-							title={theme.mode === 'dark' ? 'Modo light' : 'Modo dark'} 
-							color={theme.mode === 'dark' ? lighten(0.1, theme.colors.secondary) : theme.colors.primary}
-						/>
-						<FiLock title='Bloquear'/>
-						<FiPower onClick={handleSignOut} title='Sair'/>
-					</div>
-				</div>
-			</header>
-			<main>
+		<>
+			<Header>				
+				<RoomCode code={roomId} />
+				<FiSun 
+					onClick={()=>toggleTheme()}
+					title={theme.mode === 'dark' ? 'Modo light' : 'Modo dark'} 
+					color={theme.mode === 'dark' ? lighten(0.1, theme.colors.secondary) : theme.colors.primary}
+				/>
+				<FiPower onClick={handleSignOut} title='Sair'/>		
+			</Header>
+			<Main>
 				<div className="room-title">
 					<h1>Sala {title}</h1>
 
@@ -155,7 +149,7 @@ export function Room() {
 						);
 					})}
 				</div>
-			</main>
-		</div>
+			</Main>
+		</>
 	);
 }
