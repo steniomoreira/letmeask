@@ -20,7 +20,7 @@ export const Main = styled.main`
             font-weight: 500;
             font-size: 14px;
             text-align: center;
-            min-width:100px;
+            min-width:120px;
         }
     }
 

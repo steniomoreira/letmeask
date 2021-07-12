@@ -67,13 +67,13 @@ export function AdminRoom() {
 					Encerrar sala
 				</Button>
 
-				<FiLock onClick={handleEndRoom} title='Encerrar sala'/>	
+				<FiLock className="btn-mobile" onClick={handleEndRoom} title='Encerrar sala'/>	
 
 				<FiSun 
 					onClick={()=>toggleTheme()}
 					title={theme.mode === 'dark' ? 'Modo light' : 'Modo dark'} 
 					color={theme.mode === 'dark' ? lighten(0.1, theme.colors.secondary) : theme.colors.primary}
-				/>   
+				/>
 			</Header>
 			<Main>
 				<div className="room-title">

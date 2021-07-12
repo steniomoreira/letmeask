@@ -34,7 +34,7 @@ export function RoomCode(props: RoomCodeProps) {
 				</div>
 				<span>Sala {props.code}</span>
 			</Button>
-			<FiCopy onClick={copyRoomCodeToCliboard} title={`Sala ${props.code}`}/>
+			<FiCopy className="btn-mobile" onClick={copyRoomCodeToCliboard} title={`Sala ${props.code}`}/>
 		</>
 	);
 }

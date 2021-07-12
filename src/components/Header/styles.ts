@@ -15,6 +15,10 @@ export const HeaderContent = styled.header`
             max-height: 45px;
         }
 
+        .btn-mobile {
+            display:none
+        }
+
         svg {
             transition: .5s;
             cursor: pointer;
@@ -23,12 +27,7 @@ export const HeaderContent = styled.header`
 
             &:hover {
                 color: #e559f9 !important;
-            }
-
-            &:nth-child(3),
-            &:nth-child(5) {
-                display:none
-            }
+            }            
 
             &:last-child {
                 font-size: 21px;
@@ -50,13 +49,10 @@ export const HeaderContent = styled.header`
             button {
                 display: none;
             }
-
-            svg {
-                &:nth-child(3),
-                &:nth-child(5) {
-                    display: block;
-                }
-            }
+            
+            .btn-mobile {
+                display: block;
+            }           
         }
     }
 `;
