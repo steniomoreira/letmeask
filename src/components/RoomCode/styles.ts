@@ -31,5 +31,9 @@ export const Button = styled.button`
         min-width: 230px;
         font-size: 14px; 
         font-weight: 500;
+    }    
+
+    @media (max-width: 530px) {
+        display: none;
     }
 `;

@@ -25,6 +25,10 @@ export const HeaderContent = styled.header`
                 color: #e559f9 !important;
             }
 
+            &:nth-child(3) {
+                display:none
+            }
+
             &:last-child {
                 font-size: 21px;
             }
@@ -38,6 +42,14 @@ export const HeaderContent = styled.header`
             button {
                 height:40px;
                 transition: .5s;
+            }
+        }
+
+        @media (max-width: 530px) {
+            svg {
+                &:nth-child(3) {
+                    display: block;
+                }
             }
         }
     }

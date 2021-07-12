@@ -8,16 +8,19 @@ export const Main = styled.main`
     .room-title {
         margin: 32px 0 24px;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
 
         span {
             margin-left: 16px;
+            margin-top: 5px;
             background: ${props => props.theme.colors.secondary};
             border-radius: 9999px;
             padding: 8px 16px;
             color: #fff;
             font-weight: 500;
             font-size: 14px;
+            text-align: center;
+            min-width:100px;
         }
     }
 

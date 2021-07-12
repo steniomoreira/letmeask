@@ -1,6 +1,6 @@
 import { useContext} from "react";
 import { ThemeContext } from 'styled-components';
-import { FiClipboard } from "react-icons/fi";
+import { FiCopy } from "react-icons/fi";
 import toast, { Toaster } from 'react-hot-toast';
 
 import copyImg from './../../assets/images/copy.svg';
@@ -34,7 +34,7 @@ export function RoomCode(props: RoomCodeProps) {
 				</div>
 				<span>Sala {props.code}</span>
 			</Button>
-			{/* <FiClipboard onClick={copyRoomCodeToCliboard} title={`Sala ${props.code}`}/> */}
+			<FiCopy onClick={copyRoomCodeToCliboard} title={`Sala ${props.code}`}/>
 		</>
 	);
 }
