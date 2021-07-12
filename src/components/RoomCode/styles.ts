@@ -33,7 +33,7 @@ export const Button = styled.button`
         font-weight: 500;
     }    
 
-    @media (max-width: 530px) {
+    @media (max-width: 670px) {
         display: none;
     }
 `;

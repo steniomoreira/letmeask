@@ -11,8 +11,8 @@ export const Main = styled.main`
         align-items: flex-start;
 
         span {
-            margin-left: 16px;
             margin-top: 5px;
+            margin-left: 16px;
             background: ${props => props.theme.colors.secondary};
             border-radius: 9999px;
             padding: 8px 16px;

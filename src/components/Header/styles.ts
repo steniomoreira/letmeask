@@ -25,7 +25,8 @@ export const HeaderContent = styled.header`
                 color: #e559f9 !important;
             }
 
-            &:nth-child(3) {
+            &:nth-child(3),
+            &:nth-child(5) {
                 display:none
             }
 
@@ -45,9 +46,14 @@ export const HeaderContent = styled.header`
             }
         }
 
-        @media (max-width: 530px) {
+        @media (max-width: 670px) {
+            button {
+                display: none;
+            }
+
             svg {
-                &:nth-child(3) {
+                &:nth-child(3),
+                &:nth-child(5) {
                     display: block;
                 }
             }

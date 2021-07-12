@@ -1,5 +1,5 @@
 import { useHistory, useParams } from 'react-router-dom';
-import { FiSun } from "react-icons/fi";
+import { FiSun, FiLock } from "react-icons/fi";
 
 import { useRoom } from '../../hooks/useRoom';
 import { useTheme } from '../../hooks/useTheme';
@@ -66,6 +66,8 @@ export function AdminRoom() {
 					>
 					Encerrar sala
 				</Button>
+
+				<FiLock onClick={handleEndRoom} title='Encerrar sala'/>	
 
 				<FiSun 
 					onClick={()=>toggleTheme()}
